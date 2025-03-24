@@ -2,6 +2,7 @@ import os
 from logging import config as logging_config
 
 from core.logger import LOGGING
+os.getenv('.env')
 
 # Применяем настройки логирования
 logging_config.dictConfig(LOGGING)
