@@ -30,7 +30,7 @@ async def startup():
         logging.debug('Creating index movies in elasticsearch.')
         if await elastic.es.indices.create(index="movies", body=index_mapping):
             elastic_dump_path = os.path.join(config.BASE_DIR, 'db', 'elastic_dump.json')
-            await elastic.dump_to_elasticsearch(elastic_dump_path, 'movies')
+            await elastic.dump_to_elasticsearch(elastic_dump_path, config.ELASTIC_INDEX)
         else:
             logging.warning('Failed to create index movies in elasticsearch.')
 
