@@ -4,6 +4,7 @@ from logging import config as logging_config
 from dotenv import load_dotenv
 
 from core.logger import LOGGING
+
 load_dotenv('.env')
 logging_config.dictConfig(LOGGING)
 
@@ -15,12 +16,14 @@ ELASTIC_INDEX = os.getenv('ELASTIC_INDEX', 'movies')
 # Настройки Redis
 REDIS_HOST = os.getenv('REDIS_HOST', '127.0.0.1')
 REDIS_PORT = int(os.getenv('REDIS_PORT', 6379))
+CACHE_EXPIRE_SEC = 300
 
 # Настройки Elasticsearch
 ELASTIC_HOST = os.getenv('ELASTIC_HOST', '0.0.0.0')
 ELASTIC_PORT = int(os.getenv('ELASTIC_PORT', '9200'))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 ELASTIC_SCHEME = {
-    "movies": {
         "settings": {
             "refresh_interval": "1s",
             "analysis": {
@@ -91,8 +94,4 @@ ELASTIC_SCHEME = {
             },
         },
     }
-}
 
-
-# Корень проекта
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
